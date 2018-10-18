@@ -11,7 +11,7 @@
 static void Fatal(const char* msg)
 {
     std::cout << msg << std::endl;
-    throw std::exception(msg);
+    exit(0);
 }
 
 //------------------------------------------------------------------------------------
