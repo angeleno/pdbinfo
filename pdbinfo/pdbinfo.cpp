@@ -57,6 +57,20 @@ static std::string ToString(GUID* guid)
 }
 
 //------------------------------------------------------------------------------------
+static std::string ToString2(GUID* guid)
+{
+	char guid_string[36]; // 32 chars + 3 hyphens + null terminator
+
+	DWORD buffer[5];
+	memcpy(buffer, guid, sizeof(buffer));
+
+	snprintf(guid_string, sizeof(guid_string) / sizeof(guid_string[0]), "%lx-%lx-%lx-%lx",
+		buffer[0], buffer[1], buffer[2], buffer[3]);
+
+	return guid_string;
+}
+
+//------------------------------------------------------------------------------------
 int main(int argc, char* argv[])
 {
     if (argc != 2)
@@ -90,6 +104,7 @@ int main(int argc, char* argv[])
         StringFromGUID2(pdbGuid, szGUID, 64);
         std::cout << "PDB file: " << argv[1] << std::endl;
         std::cout << "GUID is: " << ToString(&pdbGuid) << std::endl;
+		std::cout << "GUID is: " << ToString2(&pdbGuid) << std::endl;
     }
 
     return 0;
